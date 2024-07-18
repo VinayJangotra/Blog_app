@@ -1,27 +1,36 @@
 
-'use client'
-import { assets, blog_data } from '@/Assets/assets';
-import Footer from '@/components/Footer';
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react';
-
+"use client";
+import { assets, blog_data } from "@/Assets/assets";
+import Footer from "@/components/Footer";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 const page = ({params}) => {
-    const [data, setData] = useState(null);
-    const fetchData=()=>{
-        for(let i=0;i<blog_data.length;i++){
-            if (blog_data[i].id == Number(params.id)) {
-              setData(blog_data[i]);
-              console.log(blog_data[i]);
-              break;
-            }
-        }
+  const [data, setData] = useState(null);
+
+  const fetchData = async (id) => {
+    try {
+      const response = await axios.get("/api/blog", {
+        params: {
+          id: id,
+        },
+      });
+      if (response.data.blog) {
+        setData(response.data.blog);
+      } else {
+        console.log("Failed to fetch data");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
-    useEffect(()=>{
-        fetchData();
-    },[]);
+  };
+
+  useEffect(() => {
+    if (params.id) {
+      fetchData(params.id);
+    }
+  }, [params.id]);
   return data ? (
     <>
       <div className="bg-gray-200 py-5 px-5 md:px-12 lg:px-28">
@@ -44,7 +53,7 @@ const page = ({params}) => {
           </h1>
           <Image
             className="mx-auto mt-6 border-white rounded-full"
-            src={data.author_img}
+            src={data.authorImg}
             width={60}
             height={60}
             alt=""
