@@ -23,20 +23,19 @@ const Page = () => {
       console.error("Error fetching data:", error);
     }
  }
- const deleteBlogs=async(mongoId)=>{
-    try {
-      const response = await axios.delete("/api/blog",{
-        params:{
-          id:mongoId
-        }
-      });
-      toast.success("Blog Deleted Successfully");
-      fetchBlogs();
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  
- }
+ const deleteBlogs = async (mongoId) => {
+   try {
+     const response = await axios.delete("/api/email", {
+       params: {
+         id: mongoId,
+       },
+     });
+     toast.success("Blog Deleted Successfully");
+     fetchBlogs();
+   } catch (error) {
+     console.error("Error fetching data:", error);
+   }
+ };
  useEffect(()=>{
     fetchBlogs(); 
  },[]);

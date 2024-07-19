@@ -71,42 +71,9 @@ const page = ({params}) => {
           height={720}
           alt=""
         />
-        <h1 className="my-8 text-[26px] font-semibold">Introduction :</h1>
-        <p className="mt-10 text-lg">{data.description}</p>
-        <h3 className="my-5 text-[18px] font-semibold">
-          Step 1: Self-Reflection and Goal Settings
-        </h3>
-        <p className="my-3">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae
-          quibusdam nemo accusantium aperiam, veniam dolor nam, nobis,
-          repellendus sed quam rerum ipsum? Incidunt aliquid sunt eum ad
-          recusandae dignissimos libero.
-        </p>
-        <h3 className="my-5 text-[18px] font-semibold">
-          Step 2: Self-Reflection and Goal Settings
-        </h3>
-        <p className="my-3">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae
-          quibusdam nemo accusantium aperiam, veniam dolor nam, nobis,
-          repellendus sed quam rerum ipsum? Incidunt aliquid sunt eum ad
-          recusandae dignissimos libero.
-        </p>
-        <h3 className="my-5 text-[18px] font-semibold">
-          Step 3: Self-Reflection and Goal Settings
-        </h3>
-        <p className="my-3">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae
-          quibusdam nemo accusantium aperiam, veniam dolor nam, nobis,
-          repellendus sed quam rerum ipsum? Incidunt aliquid sunt eum ad
-          recusandae dignissimos libero.
-        </p>
-        <h3 className="my-5 text-[18px] font-semibold">Conculsion</h3>
-        <p className="my-3">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae
-          quibusdam nemo accusantium aperiam, veniam dolor nam, nobis,
-          repellendus sed quam rerum ipsum? Incidunt aliquid sunt eum ad
-          recusandae dignissimos libero.
-        </p>
+    
+        <div className="blog-content" dangerouslySetInnerHTML={{__html:data.description }}></div>
+
         <div className="my-24">
           <p className="text-black font fontt-semibold my-4">
             {" "}
