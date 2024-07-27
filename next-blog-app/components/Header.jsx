@@ -4,7 +4,8 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Link from "next/link";
-
+import SuprSendInbox from "@suprsend/react-inbox";
+import "react-toastify/dist/ReactToastify.css";
 const Header = () => {
   const [email, setEmail] = useState("");
 
@@ -25,22 +26,145 @@ const Header = () => {
       toast.error("An error occurred while subscribing");
     }
   };
+const darkColors = {
+  primary: "#2E70E8",
+  primaryText: "#EFEFEF",
+  secondaryText: "#CBD5E1",
+  border: "#3A4A61",
+  main: "#1D2635",
+  error: "#F97066",
+};
 
+const sampleDarkTheme = {
+  bell: { color: "#fff" },
+  badge: { backgroundColor: darkColors.primary },
+  header: {
+    container: {
+      backgroundColor: darkColors.main,
+      borderBottom: `0.5px solid ${darkColors.border}`,
+      boxShadow: "0 0 5px 0 rgba(0, 0, 0, 0.5)",
+    },
+    headerText: { color: darkColors.primaryText },
+    markAllReadText: { color: darkColors.primary },
+  },
+  tabs: {
+    color: darkColors.primaryText,
+    unselectedColor: darkColors.secondaryText + "D9",
+    bottomColor: darkColors.primary,
+    badgeColor: "rgba(100, 116, 139, 0.5)",
+    badgeText: darkColors.primaryText,
+  },
+  notificationsContainer: {
+    container: {
+      backgroundColor: darkColors.main,
+      borderColor: darkColors.border,
+    },
+    noNotificationsText: {
+      color: darkColors.primaryText,
+    },
+    noNotificationsSubtext: {
+      color: darkColors.secondaryText,
+    },
+    loader: { color: darkColors.primary },
+  },
+  notification: {
+    container: {
+      borderBottom: `1px solid ${darkColors.border}`,
+      readBackgroundColor: darkColors.main,
+      unreadBackgroundColor: "#273244",
+      hoverBackgroundColor: "#2D3A4D",
+    },
+    pinnedText: {
+      color: darkColors?.secondaryText,
+    },
+    pinnedIcon: {
+      color: "red",
+    },
+    headerText: { color: darkColors.primaryText },
+    bodyText: {
+      color: darkColors.secondaryText,
+      blockquoteColor: "rgba(100, 116, 139, 0.5)",
+    },
+    unseenDot: { backgroundColor: darkColors.primary },
+    createdOnText: { color: darkColors.secondaryText },
+    subtext: { color: "#94a3b8" },
+    actions: [
+      { container: { backgroundColor: darkColors.primary } },
+      {
+        container: {
+          borderColor: darkColors.border,
+          backgroundColor: "transparent",
+          hoverBackgroundColor: darkColors.main,
+        },
+        text: { color: darkColors.secondaryText },
+      },
+    ],
+    expiresText: {
+      backgroundColor: "rgba(100, 116, 139, 0.5)",
+      color: darkColors.secondaryText,
+      expiringBackgroundColor: "rgba(217, 45, 32, 0.15)",
+      expiringColor: darkColors.error,
+    },
+    actionsMenuIcon: {
+      color: darkColors.secondaryText,
+      hoverBackgroundColor: "rgba(100, 116, 139, 0.5)",
+    },
+    actionsMenu: {
+      backgroundColor: darkColors.main,
+      borderColor: darkColors.border,
+    },
+    actionsMenuItem: { hoverBackgroundColor: "rgba(100, 116, 139, 0.2)" },
+    actionsMenuItemIcon: { color: darkColors.secondaryText },
+    actionsMenuItemText: {
+      color: darkColors.secondaryText,
+    },
+  },
+  toast: {
+    container: {
+      backgroundColor: darkColors.main,
+      borderColor: darkColors.border,
+    },
+    headerText: { color: darkColors.primaryText },
+    bodyText: {
+      color: darkColors.secondaryText,
+      blockquoteColor: darkColors.border,
+    },
+  },
+};
   return (
     <div className="py-5 px-5 md:px-12 lg:px-28">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center p-4 bg-white shadow-md">
         <Image
           src={assets.logo}
           width={180}
-          alt=""
+          alt="Logo"
           className="w-[130px] sm:w-auto"
         />
-        <Link href="/admin">
-          <button className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border border-solid border-black shadow-[-7px_7px_0px_#000000]">
-            Get started
-            <Image src={assets.arrow} alt="Arrow" />
-          </button>
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link href="/admin">
+            <button className="flex items-center gap-2 font-medium py-2 px-4 sm:py-3 sm:px-6 border border-solid border-black shadow-[-7px_7px_0px_#000000] transition-transform transform hover:scale-105">
+              Get started
+              <Image src={assets.arrow} alt="Arrow" />
+            </button>
+          </Link>
+          <SuprSendInbox
+            themeType="light / dark"
+            badgeComponent={(count) => <p>{count}</p>}
+            tabBadgeComponent={({ count }) => <p>{count}</p>}
+            theme={{
+              notification: {
+                container: { readBackgroundColor: "gray" },
+                headerText: { color: "red" },
+                bodyText: { color: "blue" },
+                unseenDot: { backgroundColor: "red" },
+              },
+            }}
+            workspaceKey="<workspace_key>"
+            subscriberId="<subscriber_id>"
+            distinctId="<distinct_id>"
+            className="hidden sm:block"
+          />
+        </div>
       </div>
       <div className="text-center my-8">
         <h1 className="text-3xl sm:text-5xl font-medium">Latest Blogs</h1>
