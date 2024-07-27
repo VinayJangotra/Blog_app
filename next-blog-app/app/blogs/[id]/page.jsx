@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-const page = ({params}) => {
+const Page = ({params}) => {
   const [data, setData] = useState(null);
 
   const fetchData = async (id) => {
@@ -93,4 +93,4 @@ const page = ({params}) => {
   );
 }
 
-export default page
+export default Page
